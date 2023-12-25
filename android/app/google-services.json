@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654532735500",
+    "project_id": "laporbook-9362d",
+    "storage_bucket": "laporbook-9362d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654532735500:android:e9176b45c4eb363e02b429",
+        "android_client_info": {
+          "package_name": "com.luckyalma.lapor_buku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDstkifUBDRqePYV13iGFG_EhxcGI_mhrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
