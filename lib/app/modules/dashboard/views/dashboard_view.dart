@@ -24,11 +24,8 @@ class DashboardView extends GetView<DashboardController> {
         width: Get.width,
         height: Get.height,
         child: Obx(() {
-          // Gunakan widgetOptions sebagai observable list di dalam Obx
-          return controller.widgetOptions.value[controller.currentIndex.value];
+          return controller.widgetOptions[controller.currentIndex.value];
         }),
-        // child:
-        // controller.widgetOptions.elementAt(controller.currentIndex.value),
       ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.currentIndex.value,
@@ -36,10 +33,12 @@ class DashboardView extends GetView<DashboardController> {
               controller.changeIndexBottomNavBar(value);
             },
             selectedItemColor: Colors.white,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
             selectedFontSize: 16,
             unselectedItemColor: Colors.white,
+            selectedLabelStyle: GoogleFonts.outfit(),
+            unselectedLabelStyle: GoogleFonts.outfit(),
             backgroundColor: Color.fromARGB(255, 244, 162, 97),
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -72,226 +71,97 @@ class CustomTileDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.toNamed(Routes.DETAIL, arguments: data.docId),
-      child: Container(
-        child: Column(
-          children: [
-            Container(
-              width: Get.width,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                border: Border.all(
-                  width: 1,
-                  color: Colors.black,
-                ),
+      child: Column(
+        children: [
+          Container(
+            width: Get.width,
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
+              border: Border.all(
+                width: 1,
+                color: Colors.black,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Hero(
+                tag: 'dash',
                 child: Image.network(
                   data.gambar!,
                   fit: BoxFit.fill,
                 ),
               ),
             ),
-            Container(
-              width: Get.width,
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.black),
-              ),
-              child: Text(
-                data.judul,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.outfit(),
-              ),
+          ),
+          Container(
+            width: Get.width,
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Colors.black),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 233, 196, 106),
-                      borderRadius:
-                          BorderRadius.only(bottomLeft: Radius.circular(10)),
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.black,
-                      ),
+            child: Text(
+              data.judul,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.outfit(),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 233, 196, 106),
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(10)),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.black,
                     ),
-                    child: Center(
-                      child: Text(
-                        data.status.toUpperCase().split('.').last,
-                        style: GoogleFonts.outfit(
-                          color: Colors.white,
-                        ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      data.status.toUpperCase().split('.').last,
+                      style: GoogleFonts.outfit(
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 244, 162, 97),
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(10)),
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.black,
-                      ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 244, 162, 97),
+                    borderRadius:
+                        BorderRadius.only(bottomRight: Radius.circular(10)),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.black,
                     ),
-                    child: Center(
-                      child: Text(
-                        DateFormat('d-MM-yyyy').format(data.tanggal),
-                        style: GoogleFonts.outfit(
-                          color: Colors.white,
-                        ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      DateFormat('d-MM-yyyy').format(data.tanggal),
+                      style: GoogleFonts.outfit(
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
-      // child: Container(
-      //   margin: const EdgeInsets.symmetric(vertical: 20),
-      //   height: 100,
-      //   width: Get.width,
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     borderRadius: BorderRadius.circular(10),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         offset: Offset(4, 0),
-      //         color: Colors.grey.shade200,
-      //         spreadRadius: 3,
-      //         blurRadius: 3,
-      //       )
-      //     ],
-      //   ),
-      //   child: Column(
-      //     children: [
-      //       Container(
-      //         decoration: BoxDecoration(
-      //           borderRadius: BorderRadius.only(
-      //             topLeft: Radius.circular(10),
-      //             topRight: Radius.circular(10),
-      //           ),
-      //           border: Border.all(
-      //             width: 1,
-      //             color: Colors.black,
-      //           ),
-      //         ),
-      //         height: 100,
-      //         width: Get.width,
-      //         child: ClipRRect(
-      //           borderRadius: BorderRadius.only(
-      //             topLeft: Radius.circular(10),
-      //             topRight: Radius.circular(10),
-      //           ),
-      //           child: Image.network(
-      //             data.gambar.toString(),
-      //             fit: BoxFit.fill,
-      //           ),
-      //         ),
-      //       ),
-      //       Container(
-      //         decoration: BoxDecoration(
-      //           border: Border.all(
-      //             width: 1,
-      //             color: Colors.black,
-      //           ),
-      //         ),
-      //         height: 50,
-      //         width: Get.width,
-      //         child: Center(
-      //           child: Text(
-      //             data.judul.toUpperCase(),
-      //             style: GoogleFonts.outfit(
-      //               fontWeight: FontWeight.w600,
-      //             ),
-      //             textAlign: TextAlign.center,
-      //           ),
-      //         ),
-      //       ),
-      //       Row(
-      //         children: [
-      //           Expanded(
-      //             child: Material(
-      //               color: Color.fromARGB(255, 233, 196, 106),
-      //               borderRadius: BorderRadius.only(
-      //                 bottomLeft: Radius.circular(10),
-      //               ),
-      //               child: InkWell(
-      //                 child: Container(
-      //                   decoration: BoxDecoration(
-      //                     borderRadius: BorderRadius.only(
-      //                       bottomLeft: Radius.circular(10),
-      //                     ),
-      //                     border: Border.all(
-      //                       width: 1,
-      //                       color: Colors.black,
-      //                     ),
-      //                   ),
-      //                   width: Get.width,
-      //                   padding: const EdgeInsets.all(15),
-      //                   child: Text(
-      //                     data.status.toUpperCase().split('.').last,
-      //                     style: GoogleFonts.outfit(
-      //                       color: Colors.white,
-      //                       fontWeight: FontWeight.bold,
-      //                     ),
-      //                     textAlign: TextAlign.center,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //           Expanded(
-      //             child: Material(
-      //               color: Color.fromARGB(255, 244, 162, 97),
-      //               borderRadius: BorderRadius.only(
-      //                 bottomRight: Radius.circular(10),
-      //               ),
-      //               child: InkWell(
-      //                 child: Container(
-      //                   decoration: BoxDecoration(
-      //                     borderRadius: BorderRadius.only(
-      //                       bottomRight: Radius.circular(10),
-      //                     ),
-      //                     border: Border.all(
-      //                       width: 1,
-      //                       color: Colors.black,
-      //                     ),
-      //                   ),
-      //                   width: Get.width,
-      //                   padding: const EdgeInsets.all(15),
-      //                   child: Text(
-      //                     DateFormat('d-MM-yyyy').format(data.tanggal),
-      //                     style: GoogleFonts.outfit(
-      //                       color: Colors.white,
-      //                       fontWeight: FontWeight.bold,
-      //                     ),
-      //                     textAlign: TextAlign.center,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ],
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

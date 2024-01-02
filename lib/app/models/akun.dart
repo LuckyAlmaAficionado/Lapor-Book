@@ -20,7 +20,7 @@ class Akun {
         uid: json['uid'],
         docId: json['docId'],
         nama: json['nama'],
-        noHP: json['noHP'],
+        noHP: json['noHp'],
         email: json['email'],
         role: json['role'],
       );

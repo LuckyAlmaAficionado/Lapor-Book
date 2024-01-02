@@ -62,9 +62,12 @@ class DetailView extends GetView<DetailController> {
                             width: Get.width,
                             height: 170,
                             margin: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Image.network(
-                              data.gambar!,
-                              fit: BoxFit.fill,
+                            child: Hero(
+                              tag: 'dash',
+                              child: Image.network(
+                                data.gambar!,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           const Gap(20),
@@ -208,9 +211,13 @@ class DetailView extends GetView<DetailController> {
                             ),
                           ),
                           const Gap(20),
-                          Text(
-                            data.deskripsi!,
-                            style: GoogleFonts.outfit(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Text(
+                              data.deskripsi!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.outfit(),
+                            ),
                           ),
                           const Gap(25),
                           CustomButtonDetailLaporan(
@@ -232,19 +239,32 @@ class DetailView extends GetView<DetailController> {
                               fontSize: 18,
                             ),
                           ),
-                          Obx(() => Container(
-                                height: Get.height * 0.8,
-                                child: ListView.builder(
-                                  itemCount: controller.listKomentar.length,
-                                  padding: const EdgeInsets.all(20.0),
-                                  physics: BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) =>
-                                      TileKomentarDetail(
-                                          komentar:
-                                              controller.listKomentar[index],
-                                          index: index),
-                                ),
-                              ))
+                          Obx(() => (controller.listKomentar.length == 0)
+                              ? Container(
+                                  height: Get.height * 0.2,
+                                  child: Center(
+                                    child: Text(
+                                      "Tidak Ada Komentar",
+                                      style: GoogleFonts.outfit(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  height: Get.height * 0.8,
+                                  child: ListView.builder(
+                                    itemCount: controller.listKomentar.length,
+                                    padding: const EdgeInsets.all(20.0),
+                                    physics: BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) =>
+                                        TileKomentarDetail(
+                                            komentar:
+                                                controller.listKomentar[index],
+                                            index: index),
+                                  ),
+                                ))
                         ],
                       );
                     } else {
