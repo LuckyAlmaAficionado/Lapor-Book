@@ -37,8 +37,8 @@ Lapor_Book is a web application designed to streamline the process of reporting 
 ## Image Screen Shoot Apps
 
 - **Screen Shoot 1**
-   - (screenshot/challenge_1.jpg)
-   - (screenshot/challenge_2.jpg)
+   - ![CHALLENGE1!](screenshot/challenge_1.jpg)
+   - ![CHALLENGE2!](screenshot/challenge_2.jpg)
 
 ## Technologies Used
 
