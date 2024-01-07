@@ -35,8 +35,6 @@ Lapor_Book is a web application designed to streamline the process of reporting 
    - Real-time updates using Firebase Firestore.
 
 ## Image Screen Shoot Apps
-
-- **Screen Shoot 1**
    - ![CHALLENGE1!](screenshot/challenge_1.jpg)
    - ![CHALLENGE2!](screenshot/challenge_2.jpg)
 
