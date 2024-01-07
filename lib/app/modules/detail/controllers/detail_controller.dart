@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lapor_buku/app/constant/constant.dart';
 import 'package:lapor_buku/app/models/laporan.dart';
 import 'package:lapor_buku/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:lapor_buku/app/modules/detail/views/detail_view.dart';
@@ -13,7 +14,9 @@ class DetailController extends GetxController {
   TextEditingController komentarC = TextEditingController();
   Rx<Status> statusLaporan = Status.Done.obs;
   Rx<Status> tempStatusLaporan = Status.Done.obs;
+  var alreadyLike = false.obs;
   var listKomentar = <Komentar>[].obs;
+  var listLike = <Like>[].obs;
 
   setDocIdFromArgument(String pArgument) {
     docId.value = pArgument;
@@ -98,11 +101,46 @@ class DetailController extends GetxController {
       if (laporan!.komentar != null) {
         listKomentar.value = laporan!.komentar!;
       }
+
+      if (laporan!.like != null) {
+        print('check lagi!');
+        listLike.value = laporan!.like!;
+        var checkLike = laporan!.like!
+            .where((element) => element.likeFrom == _auth.currentUser!.uid);
+
+        if (checkLike.isNotEmpty) {
+          alreadyLike.value = true;
+        }
+      }
       statusLaporan.value = convertStringToEnum(laporan!.status);
       tempStatusLaporan.value = statusLaporan.value;
       return laporan!;
     } on FirebaseException catch (e) {
       throw e;
+    }
+  }
+
+  sendLikeAndTimeWhenClicked(String docIdLaporan) async {
+    final laporan = _firestore.collection('laporan').doc(docIdLaporan);
+
+    try {
+      listLike.add(Like(
+        docIdLaporan: docIdLaporan,
+        likeFrom: _auth.currentUser!.uid,
+        createdAt: Timestamp.now(),
+      ));
+
+      laporan.update({
+        "like": listLike.map((e) => e.toJson()).toList(),
+      }).then(
+          (value) => Constant.snackbar('Like', 'menyukai laporan ini', true),
+          onError: (error) => print('Error update document $error'));
+
+      listLike.refresh();
+      // Get.put(DashboardController()).getLaporanByUid();
+      initDataLaporan(docId.value);
+    } on FirebaseException catch (e) {
+      throw ("Error: $e");
     }
   }
 

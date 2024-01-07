@@ -12,6 +12,7 @@ class Laporan {
   final String status;
   final DateTime tanggal;
   final String maps;
+  List<Like>? like;
   List<Komentar>? komentar;
 
   Laporan({
@@ -25,6 +26,7 @@ class Laporan {
     required this.status,
     required this.tanggal,
     required this.maps,
+    this.like,
     this.komentar,
   });
 
@@ -43,6 +45,9 @@ class Laporan {
                 .map((e) => Komentar.fromJson(e))
                 .toList()
             : [],
+        like: json['like'] != null
+            ? (json['like'] as List).map((e) => Like.fromJson(e)).toList()
+            : [],
         deskripsi: json['deskripsi'],
       );
 
@@ -58,6 +63,30 @@ class Laporan {
         "komentar": komentar,
         "gambar": gambar,
         "deskripsi": deskripsi,
+      };
+}
+
+class Like {
+  final String docIdLaporan;
+  final String likeFrom;
+  final Timestamp createdAt;
+
+  Like({
+    required this.docIdLaporan,
+    required this.likeFrom,
+    required this.createdAt,
+  });
+
+  factory Like.fromJson(Map<String, dynamic> json) => Like(
+        docIdLaporan: json['docIdLaporan'],
+        likeFrom: json['likeFrom'],
+        createdAt: json['createdAt'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'docIdLaporan': docIdLaporan,
+        'likeFrom': likeFrom,
+        'createdAt': createdAt,
       };
 }
 

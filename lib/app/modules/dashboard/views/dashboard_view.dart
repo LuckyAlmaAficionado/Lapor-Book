@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:lapor_buku/app/models/laporan.dart';
+import 'package:lapor_buku/app/modules/detail/controllers/detail_controller.dart';
 import 'package:lapor_buku/app/routes/app_pages.dart';
 
 import '../controllers/dashboard_controller.dart';
@@ -14,6 +14,7 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(DetailController()).alreadyLike.value = false;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 244, 162, 97),
@@ -23,9 +24,8 @@ class DashboardView extends GetView<DashboardController> {
       body: SizedBox(
         width: Get.width,
         height: Get.height,
-        child: Obx(() {
-          return controller.widgetOptions[controller.currentIndex.value];
-        }),
+        child:
+            Obx(() => controller.widgetOptions[controller.currentIndex.value]),
       ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.currentIndex.value,
@@ -70,7 +70,7 @@ class CustomTileDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.DETAIL, arguments: data.docId),
+      onTap: () => Get.offAllNamed(Routes.DETAIL, arguments: data.docId),
       child: Column(
         children: [
           Container(
@@ -92,7 +92,7 @@ class CustomTileDashboard extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
               child: Hero(
-                tag: 'dash',
+                tag: "${data.docId}image",
                 child: Image.network(
                   data.gambar!,
                   fit: BoxFit.fill,
@@ -150,7 +150,8 @@ class CustomTileDashboard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      DateFormat('d-MM-yyyy').format(data.tanggal),
+                      // DateFormat('d-MM-yyyy').format(data.tanggal),
+                      data.like!.length.toString(),
                       style: GoogleFonts.outfit(
                         color: Colors.white,
                       ),

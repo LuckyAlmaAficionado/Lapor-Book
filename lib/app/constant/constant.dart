@@ -10,6 +10,8 @@ class Constant extends GetxController {
 
   static final String LAPORAN = 'laporan.json';
 
+  static snack(String title, String text, bool isSuccess) {}
+
   static snackbar(String title, String text, bool isSuccess) {
     Get.defaultDialog(
       contentPadding: EdgeInsets.symmetric(horizontal: 30),

@@ -24,7 +24,7 @@ class DashboardController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  List<Widget> widgetOptions = [
+  List<Widget> widgetOptions = <Widget>[
     // Semua laporan
     Column(
       children: [
