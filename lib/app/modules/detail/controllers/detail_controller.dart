@@ -103,7 +103,6 @@ class DetailController extends GetxController {
       }
 
       if (laporan!.like != null) {
-        print('check lagi!');
         listLike.value = laporan!.like!;
         var checkLike = laporan!.like!
             .where((element) => element.likeFrom == _auth.currentUser!.uid);
@@ -112,6 +111,7 @@ class DetailController extends GetxController {
           alreadyLike.value = true;
         }
       }
+
       statusLaporan.value = convertStringToEnum(laporan!.status);
       tempStatusLaporan.value = statusLaporan.value;
       return laporan!;

@@ -34,6 +34,12 @@ Lapor_Book is a web application designed to streamline the process of reporting 
    - Users can engage in discussions related to each report through the comments section.
    - Real-time updates using Firebase Firestore.
 
+## Image Screen Shoot Apps
+
+- **Screen Shoot 1**
+   - (screenshot/challenge_1.jpg)
+   - (screenshot/challenge_2.jpg)
+
 ## Technologies Used
 
 - **Frontend:**
