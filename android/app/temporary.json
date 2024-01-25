@@ -1,7 +1,6 @@
 {
   "project_info": {
     "project_number": "654532735500",
-    "firebase_url": "https://laporbook-9362d-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "laporbook-9362d",
     "storage_bucket": "laporbook-9362d.appspot.com"
   },
@@ -13,12 +12,7 @@
           "package_name": "com.luckyalma.lapor_buku"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "654532735500-p2fd2lej1sh4t6jt9ioase9rifitfsl0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyDstkifUBDRqePYV13iGFG_EhxcGI_mhrY"
@@ -26,12 +20,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "654532735500-p2fd2lej1sh4t6jt9ioase9rifitfsl0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

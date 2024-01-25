@@ -105,6 +105,19 @@ class LoginView extends GetView<LoginController> {
                 ),
               ],
             ),
+            const Gap(20),
+            GestureDetector(
+              onTap: () {
+                controller.signInWithGoogle();
+              },
+              child: Container(
+                height: 40,
+                width: 40,
+                color: Colors.amber,
+                alignment: Alignment.center,
+                child: Icon(Icons.g_mobiledata),
+              ),
+            )
           ],
         ),
       ),

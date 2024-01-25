@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lapor_buku/app/models/akun.dart';
 import 'package:lapor_buku/app/models/laporan.dart';
 
@@ -213,6 +214,21 @@ class DashboardController extends GetxController {
   }
 
   Future initDataPengguna() async {
+    print('masuk sini');
+    if (_auth.currentUser!.emailVerified) {
+      User? data = _auth.currentUser;
+      Akun akun = Akun(
+          uid: data!.uid,
+          docId: data.uid,
+          nama: data.displayName!,
+          noHP: 'google',
+          email: data.email!,
+          role: 'ADMIN');
+
+      this.akun.add(akun);
+      print(this.akun);
+      return;
+    }
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
           .collection('akun')

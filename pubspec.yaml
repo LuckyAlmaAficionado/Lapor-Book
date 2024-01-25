@@ -17,6 +17,7 @@ dependencies:
   geolocator: ^10.1.0
   get: 4.6.6
   google_fonts: ^6.1.0
+  google_sign_in:
   http: null
   image_picker: ^1.0.5
   intl: ^0.19.0
